@@ -1,15 +1,16 @@
 import angular from "angular";
 import uirouter from "angular-ui-router";
-import ContainerRoute from "./Container.routes";
-import ContainerController from "./Container.controller";
+import ContainerRoutes from "./container.routes";
+import ContainerController from "./container.controller";
 
 const Container = angular.module("app.container", [
-  uirouter
-]).config(
-  ContainerRoute
-).controller(
-  'ContainerController',
-  ContainerController
-).name;
+    uirouter
+  ])
+  .config(
+    ContainerRoutes
+  ).controller(
+    "ContainerController",
+    ContainerController
+  ).name;
 
 export default Container;

@@ -1,0 +1,20 @@
+{
+  "name": "webpack-angular-starter",
+  "description": "A webpack starter of angular with gulp and bower",
+  "main": "app.module.js",
+  "authors": [
+    "Praveenkumar K"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/praveenkumar-outlook/Webpack-Angular-Starter",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-material": "^1.1.9"
+  }
+}

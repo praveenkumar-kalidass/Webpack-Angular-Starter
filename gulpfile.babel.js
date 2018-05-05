@@ -4,6 +4,8 @@ import util from "gulp-util";
 import del from "del";
 import concat from "gulp-concat";
 import minifier from "gulp-uglify";
+import uglifyjs from "uglify-js";
+import cssnano from "gulp-cssnano";
 import mainBower from "main-bower-files";
 import webpack from "webpack";
 import {HotModuleReplacementPlugin} from "webpack";
@@ -17,6 +19,26 @@ import webpackConfig from "./webpack.config.babel";
  */
 gulp.task("clean", (callback) => {
   del.sync("public/", callback);
+});
+
+/**
+ * Bundle the js files of bower components
+ */
+gulp.task("bower:js", () => {
+  return gulp.src(mainBower("**/*.js"))
+    .pipe(concat("bower.js").on("error", util.log))
+    .pipe(minifier({}, uglifyjs).on("error", util.log))
+    .pipe(gulp.dest("./public/"));
+});
+
+/**
+ * Bundle the css files of bower components
+ */
+gulp.task("bower:css", () => {
+  return gulp.src(mainBower("**/*.css"))
+    .pipe(concat("bower.css").on("error", util.log))
+    .pipe(cssnano().on("error", util.log))
+    .pipe(gulp.dest("./public/"));
 });
 
 /**
@@ -59,6 +81,8 @@ gulp.task("webpack-dev-server", () => {
 gulp.task("dev", (callback) => {
   runSequence([
     "clean",
+    "bower:js",
+    "bower:css",
     "webpack-dev-server"
   ], callback);
 });
@@ -69,6 +93,8 @@ gulp.task("dev", (callback) => {
 gulp.task("build", (callback) => {
   runSequence([
     "clean",
+    "bower:js",
+    "bower:css",
     "webpack-build"
   ], callback);
 });

@@ -2,6 +2,7 @@
 import gulp from "gulp";
 import util from "gulp-util";
 import del from "del";
+import sass from "gulp-sass";
 import concat from "gulp-concat";
 import minifier from "gulp-uglify";
 import uglifyjs from "uglify-js";
@@ -19,6 +20,24 @@ import webpackConfig from "./webpack.config.babel";
  */
 gulp.task("clean", (callback) => {
   del.sync("public/", callback);
+});
+
+/**
+ * Convert scss to css
+ */
+gulp.task("sass", function() {
+  return gulp.src(["./assets/styles/importer.scss"])
+    .pipe(sass().on("error", util.log))
+    .pipe(concat("style.css").on("error", util.log))
+    .pipe(cssnano().on("error", util.log))
+    .pipe(gulp.dest("./public/"));
+});
+
+/**
+ * Watch for scss file changes and run sass task
+ */
+gulp.task("sass:watch", function() {
+  return gulp.watch("./assets/styles/**/*.scss", ["sass"]);
 });
 
 /**
@@ -81,6 +100,8 @@ gulp.task("webpack-dev-server", () => {
 gulp.task("dev", (callback) => {
   runSequence([
     "clean",
+    "sass",
+    "sass:watch",
     "bower:js",
     "bower:css",
     "webpack-dev-server"
@@ -93,6 +114,7 @@ gulp.task("dev", (callback) => {
 gulp.task("build", (callback) => {
   runSequence([
     "clean",
+    "sass",
     "bower:js",
     "bower:css",
     "webpack-build"

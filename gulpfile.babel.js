@@ -75,9 +75,10 @@ gulp.task("webpack-build", () => {
  */
 gulp.task("webpack-dev-server", () => {
   let devConfig = Object.assign({}, webpackConfig);
-  // devConfig.entry.unshift("react-hot-loader/patch");
   devConfig.entry.unshift("webpack-dev-server/client/index.js?http://localhost:8080");
   devConfig.plugins.unshift(new HotModuleReplacementPlugin());
+  devConfig.mode = "development";
+  devConfig.devtool = "inline-source-map";
 
   new WebpackDevServer(webpack(devConfig), {
     contentBase: "public/",

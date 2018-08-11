@@ -1,7 +1,5 @@
-import uirouter from "angular-ui-router";
-
 const Core = angular.module("app.core", [
-  uirouter,
+  "ui.router",
   "ngMaterial"
 ]).name;
 

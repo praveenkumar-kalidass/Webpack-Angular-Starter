@@ -15,7 +15,6 @@ const config = {
       template: path.join(__dirname, "src/index.html")
     })
   ],
-  devtool: "source-map",
   resolve: {
     extensions: [".json", ".js"]
   },

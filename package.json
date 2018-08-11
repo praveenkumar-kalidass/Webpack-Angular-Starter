@@ -4,7 +4,8 @@
   "description": "A webpack starter of angular with gulp and bower",
   "main": "app.module.js",
   "scripts": {
-    "dev": "gulp dev"
+    "dev": "gulp dev",
+    "build": "gulp build"
   },
   "repository": {
     "type": "git",
@@ -15,7 +16,6 @@
   "homepage": "https://github.com/praveenkumar-outlook/Webpack-Angular-Starter#readme",
   "dependencies": {
     "angular": "^1.6.9",
-    "angular-ui-router": "^1.0.3",
     "del": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
